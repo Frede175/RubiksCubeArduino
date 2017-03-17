@@ -4,7 +4,7 @@
  Author:	fsr19
 */
 
-// the setup function runs once when you press reset or power the board
+
 
 #include <Stepper.h>
 #include <Adafruit_MCP23017.h>
@@ -16,8 +16,10 @@ MCPStepper stepper2(200, 4, 5, 6, 7);
 MCPStepper stepper3(200, 8, 9, 10, 11);
 MCPStepper stepper4(200, 12, 13, 14, 15);
 
+// the setup function runs once when you press reset or power the board
 void setup() {
 	mcp.begin();
+	TWBR = 12; //Increase speed of the clock on the chip
 	//mcp.pinMode(0, OUTPUT);
 	
 	stepper1.setMCP(mcp);
@@ -41,11 +43,4 @@ void loop() {
 	stepper3.step(1);
 	stepper4.step(1);
 	delay(10);
-	
-	/*
-	mcp.digitalWrite(0, HIGH);
-	delay(100);
-	mcp.digitalWrite(0, LOW);
-	delay(100);
-	*/
 }
