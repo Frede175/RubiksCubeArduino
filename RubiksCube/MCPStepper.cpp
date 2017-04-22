@@ -165,6 +165,21 @@ MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2, in
 	this->pin_count = 5;
 }
 
+MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2, Adafruit_MCP23017 mcp) {
+	MCPStepper(number_of_steps, motor_pin_1, motor_pin_2);
+	setMCP(mcp);
+}
+
+MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2, int motor_pin_3, int motor_pin_4, Adafruit_MCP23017 mcp) {
+	MCPStepper(number_of_steps, motor_pin_1, motor_pin_2, motor_pin_3, motor_pin_4);
+	setMCP(mcp);
+}
+
+MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2, int motor_pin_3, int motor_pin_4, int motor_pin_5, Adafruit_MCP23017 mcp) {
+	MCPStepper(number_of_steps, motor_pin_1, motor_pin_2, motor_pin_3, motor_pin_4, motor_pin_5);
+	setMCP(mcp);
+}
+
 /*
 * Sets the speed in revs per minute
 */

@@ -24,6 +24,13 @@ public:
 		int motor_pin_3, int motor_pin_4,
 		int motor_pin_5);
 
+	MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2, Adafruit_MCP23017 mcp);
+	MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2,
+		int motor_pin_3, int motor_pin_4, Adafruit_MCP23017 mcp);
+	MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2,
+		int motor_pin_3, int motor_pin_4,
+		int motor_pin_5, Adafruit_MCP23017 mcp);
+
 	// speed setter method:
 	void setSpeed(long whatSpeed);
 
