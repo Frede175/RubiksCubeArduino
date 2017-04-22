@@ -79,21 +79,39 @@
 	* http://www.arduino.cc/en/Reference/Stepper
 	*/
 
-#include "Arduino.h"
+
 #include "MCPStepper.h"
 
 	/*
 	* two-wire constructor.
 	* Sets which wires should control the motor.
 	*/
-MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2)
-{
-	this->hasMCP = false;
-	this->isPinModeSet = false;
+	MCPStepper::MCPStepper() {
+		this->hasMCP = false;
+		this->isPinModeSet = false;
 
-	this->step_number = 0;    // which step the motor is on
-	this->direction = 0;      // motor direction
-	this->last_step_time = 0; // time stamp in us of the last step taken
+		this->step_number = 0;    // which step the motor is on
+		this->direction = 0;      // motor direction
+		this->last_step_time = 0; // time stamp in us of the last step taken
+
+
+		
+		this->motor_pin_1 = 0;
+		this->motor_pin_2 = 0;
+		this->motor_pin_3 = 0;
+		this->motor_pin_4 = 0;
+		this->motor_pin_5 = 0;
+	}
+
+
+	MCPStepper::MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2)
+	{
+		this->hasMCP = false;
+		this->isPinModeSet = false;
+
+		this->step_number = 0;    // which step the motor is on
+		this->direction = 0;      // motor direction
+		this->last_step_time = 0; // time stamp in us of the last step taken
 	this->number_of_steps = number_of_steps; // total number of steps for this motor
 
 											 // Arduino pins for the motor control connection:

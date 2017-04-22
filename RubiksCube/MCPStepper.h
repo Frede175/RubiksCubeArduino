@@ -11,12 +11,13 @@
 #endif
 
 
-#endif
+
 
 
 class MCPStepper {
 public:
 	// constructors:
+	MCPStepper();
 	MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2);
 	MCPStepper(int number_of_steps, int motor_pin_1, int motor_pin_2,
 		int motor_pin_3, int motor_pin_4);
@@ -62,3 +63,5 @@ private:
 	void _digitalWrite(uint8_t pin, uint8_t value);
 	void _pinMode(uint8_t pin, uint8_t value);
 };
+
+#endif

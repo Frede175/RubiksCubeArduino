@@ -12,6 +12,8 @@ C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Debug\RubiksCube.cpp.o
  C:\Programming\ Program\ Files\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Programming\ Program\ Files\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h \
  C:\Programming\ Program\ Files\Arduino\libraries\Stepper\src/Stepper.h \
+ C:\Programming\ Program\ Files\Arduino\libraries\Servo\src/Servo.h \
+ C:\Programming\ Program\ Files\Arduino\libraries\Servo\src/avr/ServoTimers.h \
  C:\Users\fsr19\Documents\Arduino\libraries\Adafruit-MCP23017/Adafruit_MCP23017.h \
  C:\Programming\ Program\ Files\Arduino\hardware\arduino\avr\libraries\Wire\src/Wire.h \
  C:\Programming\ Program\ Files\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
