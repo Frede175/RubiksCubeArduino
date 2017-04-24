@@ -5,11 +5,12 @@
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
-	#include "MCPStepper.h"
-
 #else
 	#include "WProgram.h"
 #endif
+
+#include "MCPStepper.h"
+#include "Constants.h"
 
 enum Sides_T {
 	SIDE_F, SIDE_B,
@@ -27,32 +28,33 @@ class Cube {
 public:
 
 	Cube();
-	Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR);
+	Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR, Servo * servoFB, Servo * servoRL);
 
 	void MakeMove(Moves_T move);
+	void ScanCube();
 
-	//Dir is relavative to the first stepper entered.
-	void turnSteppersSync(MCPStepper * stepper1, MCPStepper * stepper2, int dir);
-
-
-	void turnStepper(MCPStepper * stepper, int dir);
+	
+	
+private:
 	MCPStepper * stepperF;
 	MCPStepper * stepperL;
 	MCPStepper * stepperB;
 	MCPStepper * stepperR;
-private:
+	Servo * servoFB;
+	Servo * servoRL;
 	
+	 //Dir is relavative to the first stepper entered.
+	void turnSteppersSync(MCPStepper * stepper1, MCPStepper * stepper2, int dir, bool overturn = true);
 
 	/*
-	 * dir is 0 for -90, 1 for 90, 2 for 180
-	 */
-	
+	* dir is 0 for -90, 1 for 90, 2 for 180
+	*/
+	void turnStepper(MCPStepper * stepper, int dir, bool overturn = true);
 
-
-
-	
+	void moveServo(Servo * servo, int pos);
 
 	Sides_T getSide(Moves_T move);
+
 	/*
 	 * dir is 0 for -90, 1 for 90, 2 for 180
 	 */

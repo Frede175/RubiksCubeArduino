@@ -5,12 +5,12 @@
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
-	#include <Adafruit_MCP23017.h>
+	
 #else
 	#include "WProgram.h"
 #endif
 
-
+#include <Adafruit_MCP23017.h>
 
 
 
@@ -38,6 +38,8 @@ public:
 	// mover method:
 	void step(int number_of_steps);
 	void setMCP(Adafruit_MCP23017 mcp);
+	
+	int getStepNumber();
 
 	int version(void);
 
