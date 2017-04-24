@@ -11,40 +11,52 @@
 	#include "WProgram.h"
 #endif
 
+enum Sides_T {
+	SIDE_F, SIDE_B,
+	SIDE_L, SIDE_R,
+	SIDE_U, SIDE_D
+};
+
+enum Moves_T {
+	F, F2, FI, B, B2, BI, L, L2, LI, R, R2, RI, U, U2, UI, D, D2, DI
+};
 
 
 
 class Cube {
 public:
 
-	enum Sides_T {
-		SIDE_F, SIDE_B,
-		SIDE_L, SIDE_R,
-		SIDE_U, SIDE_D
-	};
-
-	enum Moves_T {
-		F, F2, FI, B, B2, BI, L, L2, LI, R, R2, RI, U, U2, UI, D, D2, DI
-	};
-
-	
-
-
-
 	Cube();
 	Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR);
 
 	void MakeMove(Moves_T move);
 
+	//Dir is relavative to the first stepper entered.
+	void turnSteppersSync(MCPStepper * stepper1, MCPStepper * stepper2, int dir);
 
 
-private:
+	void turnStepper(MCPStepper * stepper, int dir);
 	MCPStepper * stepperF;
 	MCPStepper * stepperL;
 	MCPStepper * stepperB;
 	MCPStepper * stepperR;
-	void turnStepper(int stepper, int dir);
-	void turnSteppersSync(int stepper1, int stepper2, int dir);
+private:
+	
+
+	/*
+	 * dir is 0 for -90, 1 for 90, 2 for 180
+	 */
+	
+
+
+
+	
+
+	Sides_T getSide(Moves_T move);
+	/*
+	 * dir is 0 for -90, 1 for 90, 2 for 180
+	 */
+	int getDir(Moves_T move);
 
 	Sides_T sides[6];
 };

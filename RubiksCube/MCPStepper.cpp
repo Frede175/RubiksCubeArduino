@@ -279,8 +279,7 @@ void MCPStepper::stepMotor(int thisStep)
 			_digitalWrite(motor_pin_2, LOW);
 			break;
 		}
-	}
-	if (this->pin_count == 4) {
+	} else if (this->pin_count == 4) {
 		switch (thisStep) {
 		case 0:  // 1010
 			_digitalWrite(motor_pin_1, HIGH);
@@ -307,9 +306,7 @@ void MCPStepper::stepMotor(int thisStep)
 			_digitalWrite(motor_pin_4, HIGH);
 			break;
 		}
-	}
-
-	if (this->pin_count == 5) {
+	} else if (this->pin_count == 5) {
 		switch (thisStep) {
 		case 0:  // 01101
 			_digitalWrite(motor_pin_1, LOW);

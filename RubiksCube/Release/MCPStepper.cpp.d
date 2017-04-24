@@ -1,6 +1,7 @@
 C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Release\MCPStepper.cpp.o: \
  C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Release\MCPStepper.cpp \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Release\MCPStepper.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
@@ -11,8 +12,6 @@ C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Release\MCPStepper.cpp
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h \
- C:\Users\fsr19\AppData\Local\Temp\VMBuilds\RubiksCube\uno\Release\MCPStepper.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Users\fsr19\Documents\Arduino\libraries\Adafruit-MCP23017/Adafruit_MCP23017.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src/Wire.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h
