@@ -47,7 +47,7 @@ void Cube::MakeMove(Moves_T move) {
 				turnSteppersSync(stepperL, stepperR, 0, false); //Dir is not important
 			} else if (r) {
 				turnStepper(stepperR, 0, false);
-			} else if (l) {
+			} else { //l
 				turnStepper(stepperL, 0, false);
 			}
 			servoRL->write(constants::SERVO_IN_POS);
@@ -63,7 +63,7 @@ void Cube::MakeMove(Moves_T move) {
 				turnSteppersSync(stepperF, stepperB, 0, false); //Dir is not important
 			} else if (f) {
 				turnStepper(stepperF, 0, false);
-			} else if (b) {
+			} else { //b
 				turnStepper(stepperB, 0, false);
 			}
 			servoFB->write(constants::SERVO_IN_POS);
