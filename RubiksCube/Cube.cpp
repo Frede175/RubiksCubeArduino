@@ -9,13 +9,15 @@
 Cube::Cube() {
 }
 
-Cube::Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR, Servo * servoFB, Servo * servoRL) {
+Cube::Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR, Servo * servoFB, Servo * servoRL, Servo * servoDoorA, Servo * servoDoorB) {
 	this->stepperF = stepperF;
 	this->stepperL = stepperL;
 	this->stepperB = stepperB;
 	this->stepperR = stepperR;
 	this->servoFB = servoFB;
 	this->servoRL = servoRL;
+	this->servoDoorA = servoDoorA;
+	this->servoDoorB = servoDoorB;
 
 	for (int i = 0; i < 6; i++) {
 		sides[i] = Sides_T(i);
@@ -124,6 +126,63 @@ void Cube::MakeMove(Moves_T move) {
 		turnStepper(stepperR, dir);
 		break;
 	}
+}
+
+void Cube::GrabCube() {
+
+	//TODO decide with steppers need to crab:
+	servoFB->write(constants::SERVO_IN_POS);
+	delay(constants::DELAY_SERVO);
+	
+	//open the doors:
+
+	for (int i = constants::SERVO_DOOR_CLOSED_POS; i < constants::SERVO_DOOR_OPEN_POS; i++) {
+		servoDoorA->write(i);
+		servoDoorB->write(i);
+	}
+
+	delay(constants::DELAY_SERVO);
+
+	servoRL->write(constants::SERVO_IN_POS);
+
+	delay(constants::DELAY_SERVO);
+}
+
+void Cube::ScanCube(int scan) {
+
+	//scan is form 0...5
+
+	switch (scan) {
+
+	case 0:
+		//First scan rotate the arms so the camera can see the hole cube.
+		servoFB->write(constants::SERVO_OUT_POS);
+		turnSteppersSync(stepperF, stepperB, 0, false);
+		servoFB->write(constants::SERVO_IN_POS);
+		servoRL->write(constants::SERVO_OUT_POS);
+		break;
+	case 1:
+		servoRL->write(constants::SERVO_IN_POS);
+		servoFB->write(constants::SERVO_OUT_POS);
+		//turnSteppersSync(stepperF, stepperB, 0, false);
+		turnSteppersSync(stepperL, stepperR, 0, false);
+		break;
+	case 2:
+		turnSteppersSync(stepperL, stepperR, 0, false);
+		servoFB->write(constants::SERVO_IN_POS);
+		servoRL->write(constants::SERVO_OUT_POS);
+		break;
+	case 3:
+
+		break;
+	case 4:
+
+		break;
+	case 5:
+
+		break;
+	}
+
 }
 
 void Cube::turnStepper(MCPStepper * stepper, int dir, bool overturn) {

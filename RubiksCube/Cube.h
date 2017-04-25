@@ -11,6 +11,7 @@
 
 #include "MCPStepper.h"
 #include "Constants.h"
+#include "Servo.h"
 
 enum Sides_T {
 	SIDE_F, SIDE_B,
@@ -24,14 +25,22 @@ enum Moves_T {
 
 
 
+
 class Cube {
 public:
 
 	Cube();
-	Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR, Servo * servoFB, Servo * servoRL);
+	Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, MCPStepper * stepperR, Servo * servoFB, Servo * servoRL, Servo * servoDoorA, Servo * servoDoorB);
 
 	void MakeMove(Moves_T move);
-	void ScanCube();
+
+	void GrabCube();
+
+	void ReleaseCube();
+
+
+	void ScanCube(int scan);
+	
 
 	
 	
@@ -42,6 +51,8 @@ private:
 	MCPStepper * stepperR;
 	Servo * servoFB;
 	Servo * servoRL;
+	Servo * servoDoorA;
+	Servo * servoDoorB;
 	
 	 //Dir is relavative to the first stepper entered.
 	void turnSteppersSync(MCPStepper * stepper1, MCPStepper * stepper2, int dir, bool overturn = true);

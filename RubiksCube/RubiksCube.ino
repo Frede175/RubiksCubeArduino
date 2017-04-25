@@ -37,7 +37,7 @@ void setup() {
 	servoDoorA.attach(constants::SERVO_DOORA_PIN);
 	servoDoorB.attach(constants::SERVO_DOORB_PIN);
 
-	cube = Cube(&stepperF, &stepperL, &stepperB, &stepperR, &servoFB, &servoRL);
+	cube = Cube(&stepperF, &stepperL, &stepperB, &stepperR, &servoFB, &servoRL, &servoDoorA, &servoDoorB);
 }
 
 // the loop function runs over and over again until power down or reset

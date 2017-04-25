@@ -36,6 +36,9 @@ namespace constants {
 	const int SERVO_IN_POS = 100;
 	const int SERVO_OUT_POS = 50;
 
+	const int SERVO_DOOR_OPEN_POS = 100;
+	const int SERVO_DOOR_CLOSED_POS = 50;
+
 	const int DELAY_STEPPER = 50; //ms
 	const int DELAY_SERVO = 50; //ms
 
