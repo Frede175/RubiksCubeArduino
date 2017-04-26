@@ -173,13 +173,21 @@ void Cube::ScanCube(int scan) {
 		servoRL->write(constants::SERVO_OUT_POS);
 		break;
 	case 3:
-
+		turnSteppersSync(stepperF, stepperB, 0, false);
+		turnSteppersSync(stepperL, stepperR, 0, false);
+		servoRL->write(constants::SERVO_IN_POS);
+		moveServo(servoFB, constants::SERVO_OUT_POS);
 		break;
 	case 4:
-
+		turnSteppersSync(stepperL, stepperR, 0, false);
+		turnSteppersSync(stepperF, stepperB, 0, false);
+		moveServo(servoFB, constants::SERVO_IN_POS);
+		moveServo(servoRL, constants::SERVO_OUT_POS);
 		break;
 	case 5:
-
+		moveServo(servoRL, constants::SERVO_IN_POS);
+		moveServo(servoFB, constants::SERVO_OUT_POS);
+		turnSteppersSync(stepperL, stepperR, 0, false);
 		break;
 	}
 
