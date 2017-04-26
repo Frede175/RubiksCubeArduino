@@ -24,6 +24,9 @@ Servo servoFB, servoRL, servoDoorA, servoDoorB;
 
 Cube cube;
 
+bool hasSerial = false;
+String command;
+
 // the setup function runs once when you press reset or power the board
 void setup() {
 	Serial.begin(9600);
@@ -42,18 +45,27 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	cube.MakeMove(U);
-	//cube.turnSteppersSync(cube.stepperL, cube.stepperR, 1);
-	delay(2000);
+	if (hasSerial) {
+		hasSerial = false;
+		if (command == "STOP") {
+			while (1) {
+				if (hasSerial) {
+					if (command == "RESUME") break;
+				}
+			}
+		} else if (command.charAt(0) == 'M') {
+			cube.MakeMove(Moves_T(command.substring(1, command.length - 1).toInt()));
+		} else if (command.charAt(0) == 'S') {
+			cube.ScanCube(command.substring(1, command.length - 1).toInt());
+		}
+	}
 
-	cube.MakeMove(B);
-
-	delay(2000);
 }
 
 /*
  *	This is called when new serial data is comming in.
  */
 void serialEvent() {
-	
+	command = Serial.readStringUntil('\n');
+	hasSerial = true;
 }

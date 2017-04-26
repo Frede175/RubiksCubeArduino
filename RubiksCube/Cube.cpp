@@ -126,6 +126,9 @@ void Cube::MakeMove(Moves_T move) {
 		turnStepper(stepperR, dir);
 		break;
 	}
+
+
+	Serial.println("DONE");
 }
 
 void Cube::GrabCube() {
@@ -190,6 +193,8 @@ void Cube::ScanCube(int scan) {
 		turnSteppersSync(stepperL, stepperR, 0, false);
 		break;
 	}
+
+	Serial.println("DONE");
 
 }
 
