@@ -19,6 +19,14 @@ Cube::Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, 
 	this->servoDoorA = servoDoorA;
 	this->servoDoorB = servoDoorB;
 
+
+	moveServo(servoDoorA, constants::SERVO_DOOR_CLOSED_POS);
+	moveServo(servoDoorB, constants::SERVO_DOOR_CLOSED_POS);
+
+	moveServo(servoFB, constants::SERVO_OUT_POS);
+	moveServo(servoRL, constants::SERVO_OUT_POS);
+
+
 	for (int i = 0; i < 6; i++) {
 		sides[i] = Sides_T(i);
 	}

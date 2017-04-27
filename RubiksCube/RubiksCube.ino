@@ -54,9 +54,11 @@ void loop() {
 				}
 			}
 		} else if (command.charAt(0) == 'M') {
-			cube.MakeMove(Moves_T(command.substring(1, command.length - 1).toInt()));
+			int temp = (command.substring(1, (command.length() - 1))).toInt();
+			cube.MakeMove(Moves_T(temp));
 		} else if (command.charAt(0) == 'S') {
-			cube.ScanCube(command.substring(1, command.length - 1).toInt());
+			int temp = (command.substring(1, (command.length() - 1))).toInt();
+			cube.ScanCube(temp);
 		}
 	}
 
