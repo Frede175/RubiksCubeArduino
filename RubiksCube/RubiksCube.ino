@@ -59,6 +59,10 @@ void loop() {
 		} else if (command.charAt(0) == 'S') {
 			int temp = (command.substring(1, (command.length() - 1))).toInt();
 			cube.ScanCube(temp);
+		} else if (command.charAt(0) == 'G') {
+			cube.GrabCube();
+		} else if (command.charAt(0) == 'R') {
+			cube.ReleaseCube();
 		}
 	}
 

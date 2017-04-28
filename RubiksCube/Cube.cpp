@@ -143,20 +143,60 @@ void Cube::GrabCube() {
 
 	//TODO decide with steppers need to crab:
 	servoFB->write(constants::SERVO_IN_POS);
-	delay(constants::DELAY_SERVO);
 	
 	//open the doors:
 
-	for (int i = constants::SERVO_DOOR_CLOSED_POS; i < constants::SERVO_DOOR_OPEN_POS; i++) {
+	for (int i = constants::SERVO_DOOR_CLOSED_POS; i > constants::SERVO_DOOR_OPEN_POS; i--) {
 		servoDoorA->write(i);
 		servoDoorB->write(i);
 	}
 
-	delay(constants::DELAY_SERVO);
 
 	servoRL->write(constants::SERVO_IN_POS);
+}
 
-	delay(constants::DELAY_SERVO);
+void Cube::ReleaseCube() {
+
+	//Check if steppers are rotated correct. A stepper blocks another arm is the step number is NUMBER_OF_STEPS/4 (50) or NUMBER_OF_STEPS - NUMBER_OF_STEPS/4 (150)
+	
+	bool r = false, l = false;
+	if (stepperR->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperR->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) r = true;
+	if (stepperL->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperL->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) l = true;
+	if (r || l) {
+		servoRL->write(constants::SERVO_OUT_POS);
+		if (r && l) {
+			turnSteppersSync(stepperL, stepperR, 0, false); //Dir is not important
+		} else if (r) {
+			turnStepper(stepperR, 0, false);
+		} else { //l
+			turnStepper(stepperL, 0, false);
+		}
+		servoRL->write(constants::SERVO_IN_POS);
+	}
+	bool f = false, b = false;
+	if (stepperF->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperF->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) f = true;
+	if (stepperB->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperB->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) b = true;
+	if (f || b) {
+		servoFB->write(constants::SERVO_OUT_POS);
+		if (f && b) {
+			turnSteppersSync(stepperF, stepperB, 0, false); //Dir is not important
+		} else if (f) {
+			turnStepper(stepperF, 0, false);
+		} else { //b
+			turnStepper(stepperB, 0, false);
+		}
+		servoFB->write(constants::SERVO_IN_POS);
+	}
+
+
+	//close the doors:
+
+	for (int i = constants::SERVO_DOOR_OPEN_POS; i < constants::SERVO_DOOR_CLOSED_POS; i++) {
+		servoDoorA->write(i);
+		servoDoorB->write(i);
+	}
+
+	servoRL->write(constants::SERVO_OUT_POS);
 }
 
 void Cube::ScanCube(int scan) {
