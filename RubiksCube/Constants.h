@@ -34,13 +34,13 @@ namespace constants {
 	const int SERVO_DOORB_PIN = 9;
 
 	const int SERVO_IN_POS = 23;
-	const int SERVO_OUT_POS = 90;
+	const int SERVO_OUT_POS = 100;
 
-	const int SERVO_DOOR_OPEN_POS = 10;
+	const int SERVO_DOOR_OPEN_POS = 30;
 	const int SERVO_DOOR_CLOSED_POS = 60;
 
-	const int DELAY_STEPPER = 50; //ms
-	const int DELAY_SERVO = 50; //ms
+	const int DELAY_STEPPER = 1000; //ms
+	const int DELAY_SERVO = 1000; //ms
 
 	const int STEPPER_OVERTURN_AMOUNT = 5;
 }

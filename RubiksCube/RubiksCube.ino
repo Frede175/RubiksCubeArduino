@@ -45,6 +45,8 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+
+	
 	if (hasSerial) {
 		hasSerial = false;
 		if (command == "STOP") {
@@ -65,6 +67,8 @@ void loop() {
 			cube.ReleaseCube();
 		}
 	}
+
+	
 
 }
 

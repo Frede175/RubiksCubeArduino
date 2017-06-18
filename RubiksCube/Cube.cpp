@@ -19,12 +19,25 @@ Cube::Cube(MCPStepper * stepperF, MCPStepper * stepperL, MCPStepper * stepperB, 
 	this->servoDoorA = servoDoorA;
 	this->servoDoorB = servoDoorB;
 
-
-	moveServo(servoDoorA, constants::SERVO_DOOR_CLOSED_POS);
-	moveServo(servoDoorB, constants::SERVO_DOOR_CLOSED_POS);
-
+	delay(1000);
+	
 	moveServo(servoFB, constants::SERVO_OUT_POS);
 	moveServo(servoRL, constants::SERVO_OUT_POS);
+
+
+
+	
+	moveServo(servoDoorA, constants::SERVO_DOOR_OPEN_POS);
+	moveServo(servoDoorB, constants::SERVO_DOOR_OPEN_POS);
+	
+
+
+
+	delay(2500);
+
+	turnSteppersSync(stepperF, stepperB, 2);
+	
+
 
 
 	for (int i = 0; i < 6; i++) {
@@ -52,7 +65,7 @@ void Cube::MakeMove(Moves_T move) {
 		if (stepperR->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperR->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) r = true;
 		if (stepperL->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperL->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) l = true;
 		if (r || l) {
-			servoRL->write(constants::SERVO_OUT_POS);
+			moveServo(servoRL, constants::SERVO_OUT_POS);
 			if (r && l) {
 				turnSteppersSync(stepperL, stepperR, 0, false); //Dir is not important
 			} else if (r) {
@@ -60,7 +73,7 @@ void Cube::MakeMove(Moves_T move) {
 			} else { //l
 				turnStepper(stepperL, 0, false);
 			}
-			servoRL->write(constants::SERVO_IN_POS);
+			moveServo(servoRL, constants::SERVO_IN_POS);
 		}
 		
 	} else { //SIDES: SIDE_L, SIDE_R. This also takes care of rotation if one of the sides is top or bottom
@@ -68,7 +81,7 @@ void Cube::MakeMove(Moves_T move) {
 		if (stepperF->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperF->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) f = true;
 		if (stepperB->getStepNumber() == constants::NUMBER_OF_STEPS / 4 || stepperB->getStepNumber() == constants::NUMBER_OF_STEPS - constants::NUMBER_OF_STEPS / 4) b = true;
 		if (f || b) {
-			servoFB->write(constants::SERVO_OUT_POS);
+			moveServo(servoFB, constants::SERVO_OUT_POS);
 			if (f && b) {
 				turnSteppersSync(stepperF, stepperB, 0, false); //Dir is not important
 			} else if (f) {
@@ -76,7 +89,7 @@ void Cube::MakeMove(Moves_T move) {
 			} else { //b
 				turnStepper(stepperB, 0, false);
 			}
-			servoFB->write(constants::SERVO_IN_POS);
+			moveServo(servoFB, constants::SERVO_IN_POS);
 		}
 	}
 
@@ -86,7 +99,7 @@ void Cube::MakeMove(Moves_T move) {
 		//If index is 4 side is on top else side is on bottom. 
 		//Rotating the face that need to be turned to the front stepper:
 
-		servoFB->write(constants::SERVO_OUT_POS);
+		moveServo(servoFB, constants::SERVO_OUT_POS);
 
 		if (sideIndex == SIDE_U) {
 			turnSteppersSync(stepperL, stepperR, 1);
@@ -110,13 +123,13 @@ void Cube::MakeMove(Moves_T move) {
 			sides[4] = temp1;
 		}
 
-		servoFB->write(constants::SERVO_IN_POS);
+		moveServo(servoFB, constants::SERVO_IN_POS);
 
 		sideIndex = Sides_T(SIDE_F);
 		//Now that the stepperes have moved, the arm is rotated wrong:
-		servoRL->write(constants::SERVO_OUT_POS);
+		moveServo(servoRL, constants::SERVO_OUT_POS);
 		turnSteppersSync(stepperL, stepperR, 0, false); //Dir is not relavent here.
-		servoRL->write(constants::SERVO_IN_POS);
+		moveServo(servoRL, constants::SERVO_IN_POS);
 	}
 
 	//Now rotate the side that needs to rotated:
@@ -283,6 +296,7 @@ void Cube::turnSteppersSync(MCPStepper * stepper1, MCPStepper * stepper2, int di
 			overturn = false;
 			dir *= -1;
 			stepsLeft += constants::STEPPER_OVERTURN_AMOUNT;
+			delay(100);
 		}
 	}
 	delay(constants::DELAY_STEPPER);
