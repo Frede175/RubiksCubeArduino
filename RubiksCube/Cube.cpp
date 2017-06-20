@@ -166,6 +166,8 @@ void Cube::GrabCube() {
 
 
 	servoRL->write(constants::SERVO_IN_POS);
+	
+	Serial.println("DONE");
 }
 
 void Cube::ReleaseCube() {
@@ -210,6 +212,8 @@ void Cube::ReleaseCube() {
 	}
 
 	servoRL->write(constants::SERVO_OUT_POS);
+
+	Serial.println("DONE");
 }
 
 void Cube::ScanCube(int scan) {
